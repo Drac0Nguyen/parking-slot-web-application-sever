@@ -54,11 +54,6 @@ public class User {
     @Column(name = "create_date", updatable = false)
     private Date createdDate;
 
-    // @ManyToMany(fetch = FetchType.EAGER)
-    // @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns =
-    // @JoinColumn(name = "role_id"))
-    // private Set<Role> roles = new HashSet<>();
-
     @JsonManagedReference
     @ManyToMany()
     @JoinTable(name = "user_parking", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "parkinglot_id"))
@@ -67,4 +62,8 @@ public class User {
     @JsonManagedReference
     @OneToMany(mappedBy = "user")
     private List<ParkingTicket> tickets;
+
+    @JsonManagedReference
+    @OneToOne
+    private Role role;
 }
